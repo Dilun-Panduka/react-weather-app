@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Router, Route } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+import LoginComponent from './components/LoginComponent'
+import PostItems from './components/PostItems';
 
+const history = createBrowserHistory();
 ReactDOM.render(
+  
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <Router history = {history}>
+      <Route path="/" exact component={LoginComponent}></Route>
+      <Route path="/home" component={PostItems}></Route>
+    </Router>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
