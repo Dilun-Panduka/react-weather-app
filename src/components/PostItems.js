@@ -49,6 +49,13 @@ class PostItems extends Component {
       temp: "",
     };
     this.onChange = this.onChange.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout = (e) =>{
+    e.preventDefault();
+    localStorage.clear();
+    this.props.history.push("/");
   }
 
   onChange(e) {
@@ -68,8 +75,21 @@ class PostItems extends Component {
   render() {
     return (
       <MainDiv>
-        <div>
-          <h1 style={{ textAlign: "center" }}>Weather Report</h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          <div></div>
+          <div>
+            <h1 style={{ textAlign: "center" }}>Weather Report</h1>
+          </div>
+          <div>
+            <button onClick={this.logout}>Logout</button>
+          </div>
         </div>
         <div style={{ textAlign: "center" }}>
           <form onChange={this.onChange}>
@@ -100,17 +120,19 @@ class PostItems extends Component {
         </div>
         <br />
         <InfoDiv>
-          <Info style={{ backgroundColor: "#0d9a73"}}>
+          <Info style={{ backgroundColor: "#0d9a73" }}>
             <span>Location :</span>
-            <span style={{ textAlign:'center' }}>{this.state.CityName}</span>
+            <span style={{ textAlign: "center" }}>{this.state.CityName}</span>
           </Info>
-          <Info style={{ backgroundColor: "#172727"}}>
+          <Info style={{ backgroundColor: "#172727" }}>
             <span>Description :</span>
-            <span style={{ textAlign:'center' }}>{this.state.description}</span>
+            <span style={{ textAlign: "center" }}>
+              {this.state.description}
+            </span>
           </Info>
-          <Info style={{ backgroundColor: "red"}}>
+          <Info style={{ backgroundColor: "red" }}>
             <span>Temperature :</span>
-            <span style={{ textAlign:'center' }}>{this.state.temp}</span>
+            <span style={{ textAlign: "center" }}>{this.state.temp}</span>
           </Info>
         </InfoDiv>
       </MainDiv>

@@ -1,5 +1,33 @@
 import React, { Component } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const MainDiv = styled.div`
+  width: 30%;
+  height: 45vh;
+  margin: 10% auto 10%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #131369c7;
+  color: white;
+  align-content: space-between;
+`;
+
+const FormDiv = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  margin: auto 5% auto;
+`;
+
+const LoginBtn = styled.button`
+  width: 30%;
+  height: 5vh;
+  align: right;
+  background-color: lightgreen;
+  border-radius: 5px
+`;
 const USER_API_BASE_URL =
   "http://localhost:8080/oauth/token?scope=write&grant_type=password&";
 
@@ -22,7 +50,7 @@ class LoginComponent extends Component {
     e.preventDefault();
     let URL = this.createURL();
     let basicAuth = this.basicAuthCreation();
-    
+
     axios
       .post(URL, {}, { headers: { Authorization: basicAuth } })
       .then((res) => {
@@ -36,12 +64,14 @@ class LoginComponent extends Component {
       });
   };
 
-  createURL(){
-    return USER_API_BASE_URL +
-    "username=" +
-    this.state.username +
-    "&password=" +
-    this.state.password;
+  createURL() {
+    return (
+      USER_API_BASE_URL +
+      "username=" +
+      this.state.username +
+      "&password=" +
+      this.state.password
+    );
   }
 
   basicAuthCreation() {
@@ -50,30 +80,36 @@ class LoginComponent extends Component {
 
   render() {
     return (
-      <div style={{ color: "black" }}>
-        <h1>Login</h1>
-        <form>
+      <MainDiv>
+        <div>
+          <h1 style={{ textAlign: "center" }}>Login</h1>
+        </div>
+        <FormDiv>
           Username:
           <input
             type="text"
+            style={{ width: "80%", height: "4vh", borderRadius: "10px" }}
             id="username"
             name="username"
             value={this.state.username}
             onChange={this.onChange}
           />
+          <br />
           Password:
           <input
             type="password"
+            style={{ width: "80%", height: "4vh", borderRadius: "10px" }}
             id="password"
             name="password"
             value={this.state.password}
             onChange={this.onChange}
           />
-          <button type="submit" onClick={this.login}>
+          <br />
+          <LoginBtn type="submit" onClick={this.login}>
             Login
-          </button>
-        </form>
-      </div>
+          </LoginBtn>
+        </FormDiv>
+      </MainDiv>
     );
   }
 }

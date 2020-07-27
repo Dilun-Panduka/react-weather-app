@@ -15,7 +15,10 @@ ReactDOM.render(
     {/* <App /> */}
     <Router history = {history}>
       <Route path="/" exact component={LoginComponent}></Route>
-      <Route path="/home" component={PostItems}></Route>
+      {localStorage.getItem("userInfo")?
+        <Route path="/home" component={PostItems}></Route>
+      : null}
+      
     </Router>
     
   </React.StrictMode>,
