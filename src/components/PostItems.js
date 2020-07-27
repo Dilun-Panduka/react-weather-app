@@ -29,6 +29,15 @@ const Info = styled.div`
   padding: 5px;
   color: white;
 `;
+
+const LogoutBtn = styled.button`
+  width: 100%;
+  height: 5vh;
+  align: right;
+  background-color: Grey;
+  color: white;
+  border-radius: 5px
+`;
 const city = [
   { CityCode: "1248991", CityName: "Colombo", Temp: "33.0", Status: "Clouds" },
   { CityCode: "1850147", CityName: "Tokyo", Temp: "8.6", Status: "Clear" },
@@ -64,11 +73,15 @@ class PostItems extends Component {
         e.target.value +
         "&units=metric&appid=0aaacf61bfc984c8e7ea1a19b00cc414"
     ).then((response) => {
-      this.setState({
-        CityName: response.data.list[0].name,
-        description: response.data.list[0].weather[0].description,
-        temp: response.data.list[0].main.temp + " °C",
-      });
+      this.bindData(response);
+    });
+  }
+
+  bindData(response){
+    this.setState({
+      CityName: response.data.list[0].name,
+      description: response.data.list[0].weather[0].description,
+      temp: response.data.list[0].main.temp + " °C",
     });
   }
 
@@ -88,7 +101,7 @@ class PostItems extends Component {
             <h1 style={{ textAlign: "center" }}>Weather Report</h1>
           </div>
           <div>
-            <button onClick={this.logout}>Logout</button>
+            <LogoutBtn onClick={this.logout}>Logout</LogoutBtn>
           </div>
         </div>
         <div style={{ textAlign: "center" }}>

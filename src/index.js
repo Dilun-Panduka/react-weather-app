@@ -1,28 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { Router, Route } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import LoginComponent from './components/LoginComponent'
-import PostItems from './components/PostItems';
+import LoginComponent from "./components/LoginComponent";
+import PostItems from "./components/PostItems";
 
 const history = createBrowserHistory();
 ReactDOM.render(
-  
   <React.StrictMode>
     {/* <App /> */}
-    <Router history = {history}>
+    <Router history={history}>
       <Route path="/" exact component={LoginComponent}></Route>
-      {localStorage.getItem("userInfo")?
-        <Route path="/home" component={PostItems}></Route>
-      : null}
-      
+      {localStorage.getItem("userInfo") ? (
+        <Route path="/home" exact component={PostItems}></Route>
+      ) : (
+        <Redirect to="/" />
+      )}
     </Router>
-    
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
